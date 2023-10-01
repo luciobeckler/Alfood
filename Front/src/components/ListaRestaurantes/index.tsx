@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-import { useEffect } from 'react';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { IPaginacao } from '../../interfaces/IPaginacao';
 import type IRestaurante from '../../interfaces/IRestaurante';
 import style from './ListaRestaurantes.module.scss';
 import Restaurante from './Restaurante';
-import axios from 'axios';
-import { IPaginacao } from '../../interfaces/IPaginacao';
 
 const ListaRestaurantes = () => {
     const [restaurantes, setRestaurantes] = useState<IRestaurante[]>([]);

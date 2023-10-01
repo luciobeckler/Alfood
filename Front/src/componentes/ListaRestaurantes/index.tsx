@@ -4,22 +4,37 @@ import type IRestaurante from '../../interfaces/IRestaurante';
 import style from './ListaRestaurantes.module.scss';
 import Restaurante from './Restaurante';
 import axios from 'axios';
+import { IPaginacao } from '../../interfaces/IPaginacao';
 
 const ListaRestaurantes = () => {
     const [restaurantes, setRestaurantes] = useState<IRestaurante[]>([]);
+    const [proximaPagina, setProximaPagina] = useState('');
 
     useEffect(() => {
         // get restaurantes
         axios
-            .get('http://0.0.0.0:8000/api/v1/restaurantes/')
+            .get<IPaginacao<IRestaurante>>(
+                'http://0.0.0.0:8000/api/v1/restaurantes/'
+            )
             .then((response) => {
                 setRestaurantes(response.data.results);
-                console.log(restaurantes);
+                setProximaPagina(response.data.next);
             })
             .catch((error) => {
                 console.log(error);
             });
     }, []);
+
+    function verMais() {
+        axios
+            .get<IPaginacao<IRestaurante>>(proximaPagina)
+            .then((response) => {
+                setRestaurantes([...restaurantes, ...response.data.results]);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
 
     return (
         <section className={style.ListaRestaurantes}>
@@ -29,6 +44,7 @@ const ListaRestaurantes = () => {
             {restaurantes?.map((item) => (
                 <Restaurante restaurante={item} key={item.id} />
             ))}
+            {proximaPagina ? <button onClick={verMais}>Ver mais</button> : ''}
         </section>
     );
 };

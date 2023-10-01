@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import VitrineRestaurantes from './pages/VitrineRestaurantes';
 import AdministracaoRestaurante from './pages/Administracao/Restaurante/Restaurante';
+import CadastraRestaurantes from './pages/Administracao/Restaurante/CadastraRestaurantes';
 
 function App() {
     return (
@@ -11,6 +12,10 @@ function App() {
             <Route
                 path='/admin/restaurantes'
                 element={<AdministracaoRestaurante></AdministracaoRestaurante>}
+            ></Route>
+            <Route
+                path='/admin/restaurantes/novo'
+                element={<CadastraRestaurantes></CadastraRestaurantes>}
             ></Route>
         </Routes>
     );

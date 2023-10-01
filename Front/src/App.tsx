@@ -4,12 +4,12 @@ import VitrineRestaurantes from './paginas/VitrineRestaurantes';
 
 function App() {
 
-  return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/restaurantes" element={<VitrineRestaurantes />} />
-    </Routes>
-  );
+	return (
+		<Routes>
+			<Route path="/" element={<Home />} />
+			<Route path="/restaurantes" element={<VitrineRestaurantes />} />
+		</Routes>
+	);
 }
 
 export default App;
